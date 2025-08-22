@@ -1,0 +1,19 @@
+services:
+  jupyter-v2:
+    # build: .
+    image: metythorn/jupyter:latest
+    container_name: jupyter-server-5368
+    ports:
+      - "5368:8888"
+    runtime: nvidia
+    environment:
+      # Password: supports both password and token login
+      JUPYTER_PASSWORD: "96$$sweQ$$s4chlategeLsRas7003hort"
+      NVIDIA_VISIBLE_DEVICES: "all"
+      NVIDIA_DRIVER_CAPABILITIES: "compute,utility"
+      # Optional: set to a fixed token (else auto-generated)
+      # JUPYTER_TOKEN: "your-fixed-token"
+    volumes:
+      # Mount the local ./volumes folder into the Jupyter work folder
+      - ./volumes:/home/jovyan/work
+    restart: unless-stopped
